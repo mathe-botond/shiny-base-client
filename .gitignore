@@ -1,0 +1,6 @@
+.idea/
+app/node_modules/
+cache/
+node_modules/
+release/
+app/dist/
