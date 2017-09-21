@@ -1,7 +1,7 @@
 {
   "name": "style-base",
   "version": "0.0.1",
-  "description": "",
+  "description": "Embedded system",
   "main": "main.js",
   "dependencies": {
     "@angular/common": "~4.3.4",
@@ -16,6 +16,7 @@
     "angular-in-memory-web-api": "~0.3.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "electron-is-dev": "^0.3.0",
     "jquery": "^3.2.1",
     "lowdb": "^1.0.0",
     "rxjs": "5.4.2",

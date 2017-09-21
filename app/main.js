@@ -1,4 +1,6 @@
 const {app, BrowserWindow, Menu} = require('electron');
+const isDev = require('electron-is-dev');
+
 const path = require('path');
 const url = require('url');
 
@@ -6,7 +8,9 @@ const url = require('url');
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
-require('electron-reload')(__dirname);
+if (isDev) {
+    require('electron-reload')(__dirname);
+}
 
 function createWindow () {
     // Create the browser window.
@@ -34,8 +38,9 @@ function createWindow () {
         win.show()
     });
 
-    // Open the DevTools.
-    win.webContents.openDevTools();
+    //if (isDev) {
+        win.webContents.openDevTools();
+    //}
 }
 
 // This method will be called when Electron has finished

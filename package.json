@@ -1,21 +1,25 @@
 {
-  "name": "style-base-packaging",
+  "name": "shiny-base-client",
   "version": "0.0.1",
   "description": "Frontend for stylemile mainframe",
   "main": "main.js",
   "scripts": {
-    "build": "gulp watch",
+    "build": {"appId": "ro.shinybuttons.shiny-base-client"},
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "start": "electron app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mathe E. Botond",
   "license": "ISC",
   "devDependencies": {
+    "asar": "^0.13.0",
     "electron": "^1.7.5",
     "electron-reload": "^1.2.1",
+    "electron-builder": "^19.27.7",
+    "fs-jetpack": "^1.2.0",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
-    "gulp-electron": "^0.1.3",
     "merge2": "^1.2.0"
   },
   "dependencies": {}
