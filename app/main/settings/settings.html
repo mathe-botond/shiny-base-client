@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+    <div class="panel-heading" translate>menu.settings</div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend translate>printer.title</legend>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="printer" translate>printer.title</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <select id="printer" class="form-control">
+                            <option value="" translate>common.pleaseSelect</option>
+                            <option *ngFor="let printer of printers" [value]="printer.name">
+                                {{printer.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="paper-width" translate>printer.paperWidth</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <input type="number" id="paper-width" class="form-control" />
+                        <span class="input-group-addon">px</span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="panel-footer text-center">
+        <button class="btn btn-primary" translate>common.save</button>
+    </div>
+</div>

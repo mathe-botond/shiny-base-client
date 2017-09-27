@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'main/app.html'
+    template: '<router-outlet></router-outlet>'
 })
 export class AppComponent {
-    constructor() {}
-
-    name: string = 'Angular2 Nézeg';
+    constructor(private translate: TranslateService) {
+        translate.setDefaultLang('en');
+        translate.use('ro');
+    }
 }

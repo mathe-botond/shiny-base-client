@@ -19,7 +19,7 @@ gulp.task('compile-ts', function () {
         }));
 
     return merge([
-        result.pipe(gulp.dest('./app/source-gen/'))
+        result.pipe(gulp.dest('./app/gen/'))
     ]);
 });
 

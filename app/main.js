@@ -1,20 +1,23 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const isDev = require('electron-is-dev');
 
+var printer = require("./engine/printer.js");
+
 const path = require('path');
 const url = require('url');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win;
+let win, printerWin;
 
 if (isDev) {
     require('electron-reload')(__dirname);
 }
-
 function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({show: false});
+    printerWin = new BrowserWindow({show: false, width: 150, useContentSize: true});
+
     win.maximize();
 
     Menu.setApplicationMenu(null);
@@ -23,24 +26,33 @@ function createWindow () {
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
+        hash: "auth",
         slashes: true
     }));
 
-    // Emitted when the window is closed.
+    printerWin.loadURL(
+        url.format({
+            pathname: path.join(__dirname, 'index.html'),
+            protocol: 'file:',
+            hash: "print",
+            slashes: true
+        })
+    );
+
     win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        win = null
+        win = null;
+        printerWin = null;
     });
 
     win.once('ready-to-show', () => {
         win.show()
     });
 
-    //if (isDev) {
-        win.webContents.openDevTools();
-    //}
+    // Open the DevTools.
+    win.webContents.openDevTools();
+    printerWin.webContents.openDevTools();
+
+    printer.listen(win, printerWin);
 }
 
 // This method will be called when Electron has finished

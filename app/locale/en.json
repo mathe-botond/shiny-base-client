@@ -1,0 +1,7 @@
+{
+    "menu": {
+        "home": "Home",
+        "newOrder": "New order",
+        "quit": "Quit"
+    }
+}

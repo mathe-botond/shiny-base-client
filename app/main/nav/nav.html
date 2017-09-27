@@ -5,7 +5,7 @@
                 <li *ngFor="let menuItem of menu">
                     <a class="nav-item" routerLink="{{menuItem.target}}" routerLinkActive="active">
                         <span class="menu-item-icon glyphicon glyphicon-{{menuItem.icon}}"></span>
-                        <span class="menu-item-label">{{menuItem.label}}</span>
+                        <span translate class="menu-item-label">{{menuItem.label}}</span>
                     </a>
                 </li>
             </ul>

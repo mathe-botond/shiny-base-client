@@ -1,0 +1,45 @@
+{
+    "common": {
+        "pleaseSelect": "<Alegeți>",
+        "save": "Salvare"
+    },
+    "menu": {
+        "home": "Acasă",
+        "newOrder": "Ordin nou",
+        "settings": "Setări",
+        "quit": "Ieșire"
+    },
+    "client": {
+        "title": "Date client",
+        "type": {
+            "name": "Client",
+            "person": "Fizic",
+            "business": "Juridic"
+        },
+        "telephone": "Telefon",
+        "isAnonymous": "Client neidentificat",
+        "name": "Nume"
+    },
+    "order": {
+        "title": "Date ordine",
+        "type": {
+            "name": "Tip comandă",
+            "patch": "Retuș",
+            "full": "Manoperă"
+        },
+        "product": {
+            "name": "Produs",
+            "custom": "Unic"
+        },
+        "details": "Detalii",
+        "price": "Preț",
+        "actions": {
+            "reset": "Resetare",
+            "saveAndPrint": "Salvare și printare"
+        }
+    },
+    "printer": {
+        "title": "Printer",
+        "paperWidth": "Mărime hârtie"
+    }
+}

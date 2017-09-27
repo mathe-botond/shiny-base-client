@@ -4,7 +4,9 @@
   "description": "Frontend for stylemile mainframe",
   "main": "main.js",
   "scripts": {
-    "build": {"appId": "ro.shinybuttons.shiny-base-client"},
+    "build": {
+      "appId": "ro.shinybuttons.shiny-base-client"
+    },
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "start": "electron app",
@@ -14,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "asar": "^0.13.0",
-    "electron": "^1.7.5",
+    "electron": "^1.7.8",
     "electron-reload": "^1.2.1",
     "electron-builder": "^19.27.7",
     "fs-jetpack": "^1.2.0",
@@ -22,5 +24,8 @@
     "gulp-cached": "^1.1.1",
     "merge2": "^1.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "gulp-typescript": "^3.2.2",
+    "typescript": "^2.5.2"
+  }
 }

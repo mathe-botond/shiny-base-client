@@ -1,0 +1,85 @@
+<div class="panel panel-default">
+    <div class="panel-heading" translate>menu.newOrder</div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend translate>client.title</legend>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="client-type" translate>client.type.name</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <select id="client-type" class="form-control">
+                            <option value="person" translate>client.type.person</option>
+                            <option value="business" translate>client.type.business</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="client-telephone" translate>client.telephone</label>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="row">
+                            <div class="input-group col-xs-12">
+                                <input type="tel" id="client-telephone" class="form-control" />
+                            </div>
+
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="anonymous" id="client-anonymous">
+                                <span translate>client.isAnonymous</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="client-name" translate>client.name</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <input type="text" id="client-name" class="form-control" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend translate>order.title</legend>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="order-type" translate>order.type.name</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <select id="order-type" class="form-control">
+                            <option value="" translate>common.pleaseSelect</option>
+                            <option value="patch" translate>order.type.patch</option>
+                            <option value="full" translate>order.type.full</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="order-product" translate>order.product.name</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <select id="order-product" class="form-control">
+                            <option translate>order.product.custom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="order-details" translate>order.details</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <textarea id="order-details" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="order-price" translate>order.price</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <input id="order-price" type="text" class="form-control"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="panel-footer text-center">
+        <button class="btn btn-default" tabindex="-1" translate>order.actions.reset</button>
+        <button class="btn btn-primary" (click)="saveAndPrint()" translate>order.actions.saveAndPrint</button>
+    </div>
+</div>

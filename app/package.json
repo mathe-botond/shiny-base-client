@@ -12,6 +12,8 @@
     "@angular/platform-browser": "~4.3.4",
     "@angular/platform-browser-dynamic": "~4.3.4",
     "@angular/router": "~4.3.4",
+    "@ngx-translate/core": "^8.0.0",
+    "@ngx-translate/http-loader": "^2.0.0",
     "@types/core-js": "^0.9.43",
     "angular-in-memory-web-api": "~0.3.0",
     "bootstrap": "^3.3.7",
