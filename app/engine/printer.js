@@ -1,5 +1,18 @@
 var {ipcMain} = require('electron');
 
+function recursivePrint(printerWin, arg, count) {
+    printerWin.webContents.print({
+        deviceName: arg.settings.print.printer,
+        silent: true
+    });
+
+    if (count > 1) {
+        setTimeout(function() {
+            recursivePrint(printerWin, arg, count-1);
+        }, 4000);
+    }
+}
+
 exports.listen = function(win, printerWin) {
     ipcMain.on('get-printer-list', function(event, arg) {
         var printers = win.webContents.getPrinters();
@@ -7,7 +20,10 @@ exports.listen = function(win, printerWin) {
     });
 
     ipcMain.on('print', function(event, arg) {
-        printerWin.show();
-        printerWin.webContents.print({name: "POS58", silent: true});
+        printerWin.webContents.send("render-ticket", arg);
+    });
+
+    ipcMain.on('layout-print-ready', function(event, arg) {
+        recursivePrint(printerWin, arg, arg.count);
     });
 };

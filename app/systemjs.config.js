@@ -21,12 +21,18 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             '@ngx-translate/core': 'npm:@ngx-translate/core/bundles/core.umd.js',
             '@ngx-translate/http-loader': 'npm:@ngx-translate/http-loader/bundles/http-loader.umd.js',
+            'angular2-text-mask': 'npm:angular2-text-mask/dist/angular2TextMask.js',
+            'text-mask-core': 'npm:text-mask-core',
+            '@ngui/auto-complete': 'npm:@ngui/auto-complete/dist/auto-complete.umd.js',
             'electron': '@node/electron',
+            'jquery': 'npm:jquery/dist/jquery.js',
 
-            // other libraries
             'rxjs': 'npm:rxjs',
             'tslib': 'npm:tslib/tslib.js',
-            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+
+            // other libraries
+            'dx-ui': 'gen/dx-ui'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -42,6 +48,12 @@
                 defaultExtension: 'js'
             },
             rxjs: {
+                defaultExtension: 'js'
+            },
+            'text-mask-core': {
+                defaultExtension: 'js'
+            },
+            'dx-ui': {
                 defaultExtension: 'js'
             }
         }

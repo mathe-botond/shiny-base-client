@@ -4,10 +4,10 @@
         "save": "Salvare"
     },
     "menu": {
-        "home": "Acasă",
-        "newOrder": "Ordin nou",
+        "dashboard": "Dashboard",
+        "newOrder": "Introducere",
         "settings": "Setări",
-        "quit": "Ieșire"
+        "logout": "Deconectare"
     },
     "client": {
         "title": "Date client",
@@ -36,10 +36,26 @@
         "actions": {
             "reset": "Resetare",
             "saveAndPrint": "Salvare și printare"
+        },
+        "emergency": "Urgent",
+        "status": {
+            "savingAndPrinting": "Salvare și printare ordine..."
+        },
+        "notifications": {
+            "success": "Ordinea a fost salvată cu succes",
+            "fail": "S-a íntâmplat un eror în timpul salvării"
         }
     },
-    "printer": {
-        "title": "Printer",
-        "paperWidth": "Mărime hârtie"
+    "print": {
+        "title": "Printare",
+        "state": {
+            "title": "Utilizare",
+            "disabled": "Deactivat",
+            "silent": "Silențios",
+            "withSettings": "Cu setări"
+        },
+        "printer": "Printer",
+        "paperWidth": "Mărime hârtie",
+        "footer": "Footnote"
     }
 }

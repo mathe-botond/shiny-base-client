@@ -4,19 +4,12 @@ var cache = require('gulp-cached');
 
 var ts = require('gulp-typescript');
 
+var tsProject = ts.createProject('app/xtsconfig.json');
+
 gulp.task('compile-ts', function () {
-    var result = gulp.src('./app/main/**/*.ts')
+    var result = gulp.src(['app/**/*.ts', '!app/node_modules/**/*'])
         .pipe(cache('de-typing'))
-        .pipe(ts({
-            target: "es5",
-            lib: ["es2015", "dom"],
-            module: "commonjs",
-            moduleResolution: "node",
-            sourceMap: true,
-            noImplicitAny: true,
-            emitDecoratorMetadata: true,
-            experimentalDecorators: true
-        }));
+        .pipe(tsProject());
 
     return merge([
         result.pipe(gulp.dest('./app/gen/'))
@@ -24,5 +17,5 @@ gulp.task('compile-ts', function () {
 });
 
 gulp.task('watch', ['compile-ts'], function() {
-    gulp.watch('./app/main/**/*.ts', ['compile-ts']);
+    gulp.watch(['app/**/*.ts', '!app/node_modules/**/*'], ['compile-ts']);
 });

@@ -11,12 +11,13 @@ const url = require('url');
 let win, printerWin;
 
 if (isDev) {
-    require('electron-reload')(__dirname);
+    require('electron-reload')(__dirname, {});
 }
+
 function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({show: false});
-    printerWin = new BrowserWindow({show: false, width: 150, useContentSize: true});
+    printerWin = new BrowserWindow({show: false, useContentSize: true});
 
     win.maximize();
 
@@ -26,7 +27,7 @@ function createWindow () {
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
-        hash: "auth",
+        hash: "",
         slashes: true
     }));
 
@@ -45,12 +46,15 @@ function createWindow () {
     });
 
     win.once('ready-to-show', () => {
-        win.show()
+        win.show();
     });
 
-    // Open the DevTools.
-    win.webContents.openDevTools();
-    printerWin.webContents.openDevTools();
+    if (isDev) {
+        printerWin.show();
+
+        win.webContents.openDevTools();
+        printerWin.webContents.openDevTools();
+    }
 
     printer.listen(win, printerWin);
 }

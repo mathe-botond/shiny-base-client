@@ -8,9 +8,8 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="client-type" translate>client.type.name</label>
                     <div class="input-group col-sm-4 col-xs-12">
-                        <select id="client-type" class="form-control">
-                            <option value="person" translate>client.type.person</option>
-                            <option value="business" translate>client.type.business</option>
+                        <select id="client-type" class="form-control" [(ngModel)]="order.customer.type" name="type">
+                            <option *ngFor="let customerType of customerTypes | keys" [value]="customerType.value" translate>client.type.{{customerType.value}}</option>
                         </select>
                     </div>
                 </div>
@@ -20,11 +19,21 @@
                     <div class="col-sm-4 col-xs-12">
                         <div class="row">
                             <div class="input-group col-xs-12">
-                                <input type="tel" id="client-telephone" class="form-control" />
+                                <input type="tel"
+                                       [(ngModel)]="order.customer.phoneFormatted"
+                                       [disabled]="order.customer.anonymous"
+                                       [textMask]="phoneMask"
+                                       id="client-telephone"
+                                       name="phone"
+                                       class="form-control" />
                             </div>
 
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="anonymous" id="client-anonymous">
+                                <input class="form-check-input"
+                                       [(ngModel)]="order.customer.anonymous"
+                                       type="checkbox"
+                                       name="anonymous"
+                                       id="client-anonymous">
                                 <span translate>client.isAnonymous</span>
                             </label>
                         </div>
@@ -34,7 +43,12 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="client-name" translate>client.name</label>
                     <div class="input-group col-sm-4 col-xs-12">
-                        <input type="text" id="client-name" class="form-control" />
+                        <input type="text"
+                               [(ngModel)]="order.customer.name"
+                               name="customer.name"
+                               id="client-name"
+                               class="form-control"
+                               [disabled]="order.customer.anonymous" />
                     </div>
                 </div>
             </fieldset>
@@ -45,34 +59,54 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="order-type" translate>order.type.name</label>
                     <div class="input-group col-sm-4 col-xs-12">
-                        <select id="order-type" class="form-control">
-                            <option value="" translate>common.pleaseSelect</option>
-                            <option value="patch" translate>order.type.patch</option>
-                            <option value="full" translate>order.type.full</option>
+                        <select id="order-type" class="form-control"
+                                [(ngModel)]="order.type" name="order-type">
+                            <option *ngFor="let orderType of orderTypes | keys" [value]="orderType.value" translate>order.type.{{orderType.value}}</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" [hidden]="order.type == orderTypes.Full">
                     <label class="control-label col-sm-3" for="order-product" translate>order.product.name</label>
                     <div class="input-group col-sm-4 col-xs-12">
-                        <select id="order-product" class="form-control">
-                            <option translate>order.product.custom</option>
-                        </select>
+                        <input id="order-product"
+                               auto-complete
+                               [(ngModel)]="product"
+                               [source]="remote.getProducts"
+                               name="product-template"
+                               (valueChanged)="productSelected($event)"
+                               list-formatter="formatted"
+                               accept-user-input="false"
+                               class="form-control"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="order-details" translate>order.details</label>
                     <div class="input-group col-sm-4 col-xs-12">
-                        <textarea id="order-details" class="form-control"></textarea>
+                        <textarea id="order-details" class="form-control"
+                                  [(ngModel)]="order.details"
+                                  name="details"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="order-price" translate>order.price</label>
                     <div class="input-group col-sm-4 col-xs-12">
-                        <input id="order-price" type="text" class="form-control"/>
+                        <input id="order-price" type="number" class="form-control"
+                               [(ngModel)]="order.price" name="price"/>
+                        <span class="input-group-addon">{{settings.currency}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4 col-xs-12 alert alert-danger">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="order-emergency"
+                                   [(ngModel)]="order.isEmergency" name="emergency">
+                            <span translate>order.emergency</span>
+                        </label>
                     </div>
                 </div>
             </fieldset>

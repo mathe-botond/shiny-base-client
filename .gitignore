@@ -6,3 +6,4 @@ release/
 app/dist/
 dist/
 app/source-gen/
+app/gen/
