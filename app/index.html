@@ -5,27 +5,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/bootswatch/spacelab/bootstrap.css" />
+    <link rel="stylesheet" href="node_modules/datatables.net-dt/css/jquery.dataTables.css" />
 
     <!-- Polyfill(s) for older browsers -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <script>if (window.module) module = window.module;</script>
 
-    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-
-    <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="chrome-reset.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-
     <script src="systemjs.config.js"></script>
-    <script>
-        System.import('gen/main/main').catch(function(err){ console.error(err); });
-    </script>
 </head>
 
 <body>
 <my-app>Loading AppComponent content here ...</my-app>
 </body>
 </html>
+

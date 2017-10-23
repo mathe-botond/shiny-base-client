@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-    templateUrl: 'main/layout/layout.html',
-    styleUrls: ["main/layout/layout.css"]
+    templateUrl: 'layout.component.html',
+    styleUrls: ['layout.component.css']
 })
 export class LayoutComponent {
 }

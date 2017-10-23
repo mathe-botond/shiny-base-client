@@ -10,6 +10,7 @@
             'app': 'gen',
 
             // angular bundles
+            'shim': 'npm:core-js/client/shim.min.js',
             '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
             '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
             '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
@@ -26,13 +27,36 @@
             '@ngui/auto-complete': 'npm:@ngui/auto-complete/dist/auto-complete.umd.js',
             'electron': '@node/electron',
             'jquery': 'npm:jquery/dist/jquery.js',
+            'bootstrap': 'npm:bootstrap/dist/js/bootstrap.min.js',
+            'datatables.net': 'npm:datatables.net/js/jquery.dataTables.js',
+            'angular-datatables': 'npm:angular-datatables/bundles/angular-datatables.umd.js',
 
             'rxjs': 'npm:rxjs',
             'tslib': 'npm:tslib/tslib.js',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-
+            'zone': 'npm:zone.js/dist/zone.js',
             // other libraries
             'dx-ui': 'gen/dx-ui'
+        },
+        meta: {
+            'npm:jquery/dist/jquery.js': {
+                format: 'global'
+            },
+            'npm:core-js/client/shim.min.js': {
+                format: 'global'
+            },
+            'npm:datatables.net/js/jquery.dataTables.js': {
+                format: 'global',
+                deps: [ 'npm:jquery/dist/jquery.js', 'npm:core-js/client/shim.min.js' ]
+            },
+            'npm:bootstrap/dist/js/bootstrap.min.js': {
+                format: 'global',
+                deps: [ 'npm:jquery/dist/jquery.js' ]
+            },
+            'npm:zone.js/dist/zone.js': {
+                format: 'global',
+                deps: [ 'npm:jquery/dist/jquery.js' ]
+            }
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -58,4 +82,17 @@
             }
         }
     });
+
+    Promise.all([
+        System.import('jquery'),
+        System.import('shim'),
+        System.import('bootstrap'),
+        System.import('datatables.net'),
+        System.import('zone')
+
+    ]).then(function() {
+        System.import('gen/main/main').catch(function(err){ console.error(err); });
+    });
 })(this);
+
+

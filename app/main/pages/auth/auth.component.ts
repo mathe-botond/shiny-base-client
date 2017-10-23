@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    templateUrl: 'main/auth/auth.html',
-    styleUrls: ["main/auth/auth.css"]
+    templateUrl: './auth.component.html',
+    styleUrls: ["./auth.component.css"]
 })
 export class AuthPageComponent {
 

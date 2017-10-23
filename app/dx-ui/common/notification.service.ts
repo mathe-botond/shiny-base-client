@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {DxNotification} from "../model";
+import {DxNotification} from "../dx-ui.model";
 
 @Injectable()
 export class NotificationService {

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {MenuItem} from "../model";
+import {MenuItem} from "../../app.model";
 
 export const TOKEN_APP = "app";
 export const TOKEN_DASHBOARD = "dashboard";

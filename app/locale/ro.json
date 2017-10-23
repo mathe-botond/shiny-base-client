@@ -1,7 +1,8 @@
 {
     "common": {
         "pleaseSelect": "<Alegeți>",
-        "save": "Salvare"
+        "save": "Salvare",
+        "currency": ""
     },
     "menu": {
         "dashboard": "Dashboard",
@@ -9,16 +10,20 @@
         "settings": "Setări",
         "logout": "Deconectare"
     },
-    "client": {
+    "customer": {
+        "id": "ID. client",
+        "clearId": "Șterge ID-ul",
         "title": "Date client",
         "type": {
-            "name": "Client",
+            "name": "Tip",
             "person": "Fizic",
             "business": "Juridic"
         },
         "telephone": "Telefon",
         "isAnonymous": "Client neidentificat",
-        "name": "Nume"
+        "name": "Nume",
+        "existing": "Clienti existenti",
+        "new": "Client nou"
     },
     "order": {
         "title": "Date ordine",
@@ -57,5 +62,8 @@
         "printer": "Printer",
         "paperWidth": "Mărime hârtie",
         "footer": "Footnote"
+    },
+    "settings": {
+        "general": "Setări generale"
     }
 }

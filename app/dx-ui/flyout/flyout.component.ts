@@ -1,10 +1,10 @@
 import {Component, ElementRef, Input, ViewChild, AfterViewInit} from "@angular/core";
-import {DxNotification, MessageType} from "../model";
-import * as jQuery from 'jquery';
+import {DxNotification, MessageType} from "../dx-ui.model";
+import * as $ from 'jquery';
 
 @Component({
     selector: "flyout",
-    templateUrl: "dx-ui/flyout/flyout.html"
+    templateUrl: "dx-ui/flyout/flyout.component.html"
 })
 export class FlyoutComponent implements AfterViewInit{
     @Input() notification: DxNotification;
@@ -23,7 +23,7 @@ export class FlyoutComponent implements AfterViewInit{
     }
 
     ngAfterViewInit(): void {
-        let $notification = jQuery(this.input.nativeElement).hide().slideDown();
+        let $notification = $(this.input.nativeElement).hide().slideDown();
         if (this.notification.type == MessageType.Success) {
             $notification.delay(4000).slideUp()
                 .promise().done(this.notification.expire);

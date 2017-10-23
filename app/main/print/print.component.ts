@@ -1,10 +1,10 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { ipcRenderer } from 'electron';
-import {Customer, Order, PrintData, Settings} from "../model";
+import {Customer, Order, PrintData, Settings} from "../app.model";
 
 @Component({
-    templateUrl: 'main/print/print.html',
-    styleUrls: ['main/print/print.css'],
+    templateUrl: 'print.component.html',
+    styleUrls: ['print.component.css'],
     encapsulation: ViewEncapsulation.None
 })
 export class PrintPageComponent implements OnInit {

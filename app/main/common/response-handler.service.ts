@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {MessageType} from "../../dx-ui/model";
+import {MessageType} from "../../dx-ui/dx-ui.model";
 
 @Injectable()
 export class ResponseHandler {

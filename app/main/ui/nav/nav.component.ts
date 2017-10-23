@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
-import {DashboardPageComponent} from '../dashboard/dashboard';
-import {OrderPageComponent} from '../order/order';
-import {SettingsPageComponent} from '../settings/settings';
-import {PrintPageComponent} from "../print/print";
-import {LayoutComponent} from "../layout/layout";
-import {AuthPageComponent} from "../auth/auth";
-import {NavigationService, TOKEN_APP, TOKEN_DASHBOARD, TOKEN_NEW_ORDER, TOKEN_SETTINGS} from "./navigationService";
+import {DashboardPageComponent} from '../../pages/dashboard/dashboard.component';
+import {OrderPageComponent} from '../../pages/order/order.component';
+import {SettingsPageComponent} from '../../pages/settings/settings.component';
+import {PrintPageComponent} from "../../print/print.component";
+import {LayoutComponent} from "../layout/layout.component";
+import {AuthPageComponent} from "../../pages/auth/auth.component";
+import {NavigationService, TOKEN_APP, TOKEN_DASHBOARD, TOKEN_NEW_ORDER, TOKEN_SETTINGS} from "./navigation.service";
 
 @Component({
     selector: 'shy-nav',
-    templateUrl: 'main/nav/nav.html',
-    styleUrls: ['main/nav/nav.css']
+    templateUrl: 'nav.component.html',
+    styleUrls: ['nav.component.css']
 })
 export class NavComponent {
     static ROUTES = [

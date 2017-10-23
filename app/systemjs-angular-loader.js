@@ -2,48 +2,56 @@ var templateUrlRegex = /templateUrl\s*:(\s*['"`](.*?)['"`]\s*)/gm;
 var stylesRegex = /styleUrls *:(\s*\[[^\]]*?\])/g;
 var stringRegex = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
 
-module.exports.translate = function(load){
-  if (load.source.indexOf('moduleId') != -1) return load;
+function resolveResourceUrl(base, path) {
+    if (base.startsWith('gen/')) {
+        base = base.substr(4);
+    }
 
-  var url = document.createElement('a');
-  url.href = load.address;
+    if (path.startsWith('.')) {
+        return base + path.substr(1);
+    }
 
-  var basePathParts = url.pathname.split('/');
+    if (! path.startsWith('/')) {
+        return base + '/' + path;
+    }
 
-  basePathParts.pop();
-  var basePath = basePathParts.join('/');
+    return path;
+}
 
-  var baseHref = document.createElement('a');
-  baseHref.href = this.baseURL;
-  baseHref = baseHref.pathname;
+module.exports.translate = function (load) {
+    if (load.source.indexOf('moduleId') != -1) return load;
 
-  if (!baseHref.startsWith('/base/')) { // it is not karma
-    basePath = basePath.replace(baseHref, '');
-  }
+    var url = document.createElement('a');
+    url.href = load.address;
 
-  load.source = load.source
-    .replace(templateUrlRegex, function(match, quote, url){
-      var resolvedUrl = url;
+    var basePathParts = url.pathname.split('/');
 
-      if (url.startsWith('.')) {
-        resolvedUrl = basePath + url.substr(1);
-      }
+    basePathParts.pop();
+    var basePath = basePathParts.join('/');
 
-      return 'templateUrl: "' + resolvedUrl + '"';
-    })
-    .replace(stylesRegex, function(match, relativeUrls) {
-      var urls = [];
+    var baseHref = document.createElement('a');
+    baseHref.href = this.baseURL;
+    baseHref = baseHref.pathname;
 
-      while ((match = stringRegex.exec(relativeUrls)) !== null) {
-        if (match[2].startsWith('.')) {
-          urls.push('"' + basePath + match[2].substr(1) + '"');
-        } else {
-          urls.push('"' + match[2] + '"');
-        }
-      }
+    if (!baseHref.startsWith('/base/')) { // it is not karma
+        basePath = basePath.replace(baseHref, '');
+    }
 
-      return "styleUrls: [" + urls.join(', ') + "]";
-    });
+    load.source = load.source
+        .replace(templateUrlRegex, function (match, quote, url) {
+            var resolvedUrl = resolveResourceUrl(basePath, url);
+            return 'templateUrl: "' + resolvedUrl + '"';
+        })
+        .replace(stylesRegex, function (match, relativeUrls) {
+            var urls = [];
 
-  return load;
+            while ((match = stringRegex.exec(relativeUrls)) !== null) {
+                const resolved = resolveResourceUrl(basePath, match[2]);
+                urls.push('"' + resolved + '"');
+            }
+
+            return "styleUrls: [" + urls.join(', ') + "]";
+        });
+
+    return load;
 };

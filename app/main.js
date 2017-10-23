@@ -1,7 +1,8 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const isDev = require('electron-is-dev');
 
-var printer = require("./engine/printer.js");
+var printer = require('./engine/printer.js');
+var mySettings = require('./engine/settings');
 
 const path = require('path');
 const url = require('url');
@@ -11,7 +12,11 @@ const url = require('url');
 let win, printerWin;
 
 if (isDev) {
-    require('electron-reload')(__dirname, {});
+    require('electron-reload')(__dirname, {
+        ignored: [
+            /node_modules|[/\\]\.|.*\.ts/
+        ]
+    });
 }
 
 function createWindow () {
@@ -42,6 +47,7 @@ function createWindow () {
 
     win.on('closed', () => {
         win = null;
+        printerWin.close();
         printerWin = null;
     });
 
@@ -50,19 +56,21 @@ function createWindow () {
     });
 
     if (isDev) {
-        printerWin.show();
-
         win.webContents.openDevTools();
         printerWin.webContents.openDevTools();
+        // printerWin.show();
     }
 
     printer.listen(win, printerWin);
+    mySettings.listen();
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+    createWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
