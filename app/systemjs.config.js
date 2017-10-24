@@ -30,6 +30,7 @@
             'bootstrap': 'npm:bootstrap/dist/js/bootstrap.min.js',
             'datatables.net': 'npm:datatables.net/js/jquery.dataTables.js',
             'angular-datatables': 'npm:angular-datatables/bundles/angular-datatables.umd.js',
+            'angular2-wizard': 'npm:angular2-wizard/dist/index.js',
 
             'rxjs': 'npm:rxjs',
             'tslib': 'npm:tslib/tslib.js',
@@ -79,8 +80,14 @@
             },
             'dx-ui': {
                 defaultExtension: 'js'
+            },
+            'node_modules/angular2-wizard/dist/src/': {
+                defaultExtension: 'js'
             }
-        }
+        },
+
+        transpiler: 'plugin-traceur',
+        transpilerRuntime: false
     });
 
     Promise.all([

@@ -23,7 +23,12 @@
         "isAnonymous": "Client neidentificat",
         "name": "Nume",
         "existing": "Clienti existenti",
-        "new": "Client nou"
+        "new": "Client nou",
+        "action": {
+            "saveClientOnly": "Salvare numai date client",
+            "continueWithoutClientData": "Continuare fără date client",
+            "saveAndContinue": "Salvare și continuare"
+        }
     },
     "order": {
         "title": "Date ordine",
@@ -39,7 +44,7 @@
         "details": "Detalii",
         "price": "Preț",
         "actions": {
-            "reset": "Resetare",
+            "back": "Înapoi la date client",
             "saveAndPrint": "Salvare și printare"
         },
         "emergency": "Urgent",

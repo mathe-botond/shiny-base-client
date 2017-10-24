@@ -25,6 +25,9 @@ import {NavigationService} from "./ui/nav/navigation.service";
 import {MaskService} from "./common/mask.service";
 import {ApiService} from "./common/api.service";
 import {PrintService} from "./common/service/print.service";
+import {CustomerComponent} from "./pages/order/customer/customer.component";
+import {ProductComponent} from "./pages/order/product/product.component";
+import {FormWizardModule} from "angular2-wizard";
 
 export function createTranslateLoader(http: HttpClient) {
     let base = 'file://' + __dirname + '/../../locale/';
@@ -57,8 +60,7 @@ export function initShinyBaseApp(settings: SettingsService): () => Promise<any> 
             }
         }),
         DataTablesModule,
-        TextMaskModule,
-        NguiAutoCompleteModule,
+        TextMaskModule, NguiAutoCompleteModule, FormWizardModule,
         DxUiModule
     ],
     declarations: [
@@ -66,7 +68,7 @@ export function initShinyBaseApp(settings: SettingsService): () => Promise<any> 
         LayoutComponent,
         NavComponent,
         AuthPageComponent,
-        OrderPageComponent,
+        OrderPageComponent, CustomerComponent, ProductComponent,
         DashboardPageComponent,
         SettingsPageComponent,
         PrintPageComponent,

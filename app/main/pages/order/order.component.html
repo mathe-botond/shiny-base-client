@@ -1,163 +1,32 @@
-<div class="panel panel-default">
-    <div class="panel-heading" translate>menu.newOrder</div>
-    <div class="panel-body">
-        <form class="form-horizontal">
-            <fieldset>
-                <legend translate>customer.title</legend>
+<h3 translate>menu.newOrder</h3>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="client-id" translate>customer.id</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <input type="text" [ngModel]="order.customer.id || ('customer.new' | translate)"
-                               name="customer.id"
-                               id="client-id"
-                               class="form-control"
-                               [readonly]="true" />
-
-                        <div class="input-group-btn">
-                            <button class="btn btn-default"
-                                    (click)="clearCustomerId()"
-                                    translate>customer.clearId</button>
-                        </div>
-                    </div>
+<form class="form-horizontal">
+    <form-wizard #wizard>
+        <wizard-step [title]="'customer.title' | translate" [showPrev]="false" [showNext]="false">
+            <div class="panel panel-default">
+                <div class="panel-heading" translate>customer.title</div>
+                <div class="panel-body">
+                    <app-customer [customer]="order.customer"></app-customer>
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="client-type" translate>customer.type.name</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <select id="client-type" class="form-control" [ngModel]="order.customer.type"
-                                (ngModelChange)="changeCustomerType($event)" name="type">
-                            <option *ngFor="let customerType of customerTypes | keys" [value]="customerType.value" translate>customer.type.{{customerType.value}}</option>
-                        </select>
-                    </div>
+                <div class="panel-footer text-center">
+                    <button class="btn btn-default" tabindex="-1" (click)="saveAndClearCustomer()" translate>customer.action.saveClientOnly</button>
+                    <button class="btn btn-default" tabindex="-1" (click)="continueWithoutClient()" translate>customer.action.continueWithoutClientData</button>
+                    <button class="btn btn-primary" (click)="saveClientAndContinue()" translate>customer.action.saveAndContinue</button>
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="client-telephone" translate>customer.telephone</label>
-                    <div class="col-sm-4 col-xs-12">
-                        <div class="row">
-                            <div class="input-group col-xs-12">
-                                <input type="tel"
-                                       [ngModel]="order.customer.phoneFormatted"
-                                       (ngModelChange)="changePhone($event)"
-                                       [disabled]="order.customer.anonymous"
-                                       [textMask]="mask.phone"
-                                       id="client-telephone"
-                                       name="phone"
-                                       class="form-control" />
-                            </div>
-
-                            <label class="form-check-label">
-                                <input class="form-check-input"
-                                       [ngModel]="order.customer.anonymous"
-                                       (ngModelChange)="changeName($event)"
-                                       type="checkbox"
-                                       name="anonymous"
-                                       id="client-anonymous">
-                                <span translate>customer.isAnonymous</span>
-                            </label>
-                        </div>
-                    </div>
+            </div>
+        </wizard-step>
+        <wizard-step [title]="'order.title' | translate" [showPrev]="false" [showNext]="false">
+            <div class="panel panel-default">
+                <div class="panel-heading" translate>order.title</div>
+                <div class="panel-body">
+                    <app-product [order]="order"></app-product>
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="client-name" translate>customer.name</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <input type="text"
-                               [(ngModel)]="order.customer.name"
-                               name="customer.name"
-                               id="client-name"
-                               class="form-control"
-                               [disabled]="order.customer.anonymous" />
-                    </div>
+                <div class="panel-footer text-center">
+                    <button class="btn btn-default" tabindex="-1" translate (click)="backToClientEdit()">order.actions.back</button>
+                    <button class="btn btn-primary" (click)="saveAndPrintOrder()" translate>order.actions.saveAndPrint</button>
                 </div>
+            </div>
+        </wizard-step>
+    </form-wizard>
+</form>
 
-                <table datatable="ng" [dtOptions]="customerListOptions" [dtTrigger]="dtTrigger" class="table">
-                    <thead>
-                        <tr>
-                            <th colspan="3"><span translate>customer.existing</span>:</th>
-                        </tr>
-                        <tr>
-                            <th translate>customer.id</th>
-                            <th translate>customer.type.name</th>
-                            <th translate>customer.name</th>
-                            <th translate>customer.telephone</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="customers.length > 0">
-                        <tr *ngFor="let customer of customers; let i = index"
-                                (click)="selectCustomer(customers[i])"
-                                [ngClass]="{active: customer.id == order.customer.id}">
-                            <td>{{customer.id}}</td>
-                            <td translate>customer.type.{{customer.type}}</td>
-                            <td>{{customer.name}}</td>
-                            <td>{{customer.phoneFormatted}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </fieldset>
-
-            <fieldset>
-                <legend translate>order.title</legend>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="order-type" translate>order.type.name</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <select id="order-type" class="form-control"
-                                [(ngModel)]="order.type" name="order-type">
-                            <option *ngFor="let orderType of orderTypes | keys" [value]="orderType.value" translate>order.type.{{orderType.value}}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group" [hidden]="order.type == orderTypes.Full">
-                    <label class="control-label col-sm-3" for="order-product" translate>order.product.name</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <input id="order-product"
-                               auto-complete
-                               [(ngModel)]="product"
-                               [source]="remote.getProducts"
-                               name="product-template"
-                               (valueChanged)="productSelected($event)"
-                               list-formatter="formatted"
-                               accept-user-input="false"
-                               class="form-control"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="order-details" translate>order.details</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <textarea id="order-details" class="form-control"
-                                  [(ngModel)]="order.details"
-                                  name="details"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3" for="order-price" translate>order.price</label>
-                    <div class="input-group col-sm-4 col-xs-12">
-                        <input id="order-price" type="number" class="form-control"
-                               [(ngModel)]="order.price" name="price"/>
-                        <span class="input-group-addon">{{settings.currency}}</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-4 col-xs-12 alert alert-danger">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" id="order-emergency"
-                                   [(ngModel)]="order.isEmergency" name="emergency">
-                            <span translate>order.emergency</span>
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div class="panel-footer text-center">
-        <button class="btn btn-default" tabindex="-1" translate>order.actions.reset</button>
-        <button class="btn btn-primary" (click)="saveAndPrint()" translate>order.actions.saveAndPrint</button>
-    </div>
-</div>

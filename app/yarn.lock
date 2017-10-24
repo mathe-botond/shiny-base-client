@@ -180,6 +180,12 @@ angular2-text-mask@^8.0.4:
   dependencies:
     text-mask-core "^5.0.0"
 
+angular2-wizard@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/angular2-wizard/-/angular2-wizard-0.4.0.tgz#78a92778dc8ec64f2074a53bd981a4a2127f1939"
+  dependencies:
+    bootstrap "^4.0.0-alpha.6"
+
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"
@@ -380,6 +386,10 @@ boom@5.x.x:
 bootstrap@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+
+bootstrap@^4.0.0-alpha.6:
+  version "4.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.2.tgz#4d67d2aa2219f062cd90bc1247e6747b9e8fd051"
 
 bootswatch@^3.3.7:
   version "3.3.7"
@@ -2682,9 +2692,9 @@ symbol-observable@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
 
-systemjs@0.19.40:
-  version "0.19.40"
-  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.40.tgz#158f64a9f4ef541a7fda6b40e527ee46b6c54cd0"
+systemjs@0.19:
+  version "0.19.47"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.47.tgz#c8c93937180f3f5481c769cd2720763fb4a31c6f"
   dependencies:
     when "^3.7.5"
 

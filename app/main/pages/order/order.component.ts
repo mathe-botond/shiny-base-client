@@ -1,41 +1,30 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Customer, CustomerType, Order, OrderType, Product} from "../../app.model";
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Customer, Order} from "../../app.model";
 import {SettingsService} from "../settings/settings.service";
-import {OrderRemoteService} from "./order-remote.service";
+import {OrderRemoteService} from "./order.service";
 import {NotificationService} from "../../../dx-ui/common/notification.service";
 import {DxNotification, MessageType} from "../../../dx-ui/dx-ui.model";
 import {NavigationService} from "../../ui/nav/navigation.service";
-import {MaskService} from "../../common/mask.service";
 import {PrintService} from "../../common/service/print.service";
-import { Subject } from 'rxjs/Rx';
-import {DataTableDirective} from "angular-datatables";
+import {WizardComponent} from "angular2-wizard";
 
 @Component({
     templateUrl: './order.component.html',
     providers: [OrderRemoteService]
 })
-export class OrderPageComponent implements OnInit, AfterViewInit {
-    @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-
-    customerListOptions: DataTables.Settings = {};
-
+export class OrderPageComponent implements AfterViewInit {
     order: Order;
-    customerTypes = CustomerType;
-    orderTypes = OrderType;
 
-    customers: Customer[] = [];
-    dtTrigger: Subject<any> = new Subject();
+    @ViewChild('wizard') wizard: WizardComponent;
 
     constructor(
             public settings: SettingsService,
-            public mask: MaskService,
             private remote: OrderRemoteService,
             private notificationService: NotificationService,
             private navigation: NavigationService,
             private printer: PrintService) {
 
         this.init();
-        this.getCustomers();
     };
 
     private init() {
@@ -44,23 +33,41 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         this.order.customer.phone = '40';
     }
 
-    ngOnInit(): void {
-        this.customerListOptions = {
-            lengthChange: false,
-            searching: false
-        };
-    }
-
     ngAfterViewInit(): void {
-        this.dtTrigger.next();
+        console.log(this.wizard);
+        setTimeout(() => {
+            this.wizard.complete();
+        }, 1);
     }
 
-    productSelected = (product: Product) => {
-        this.order.price = product.price;
-        this.order.details = product.description;
-    };
+    private saveCustomer() {
+        this.remote.saveCustomer(this.order.customer, (message: MessageType) => {
+            const textMessage = (message == MessageType.Success) ? 'customer.saved' : 'customer.saveFailed';
+            this.notificationService.notify(new DxNotification(textMessage, message));
+        });
+    }
 
-    saveAndPrint() {
+    saveAndClearCustomer() {
+        this.saveCustomer();
+        this.order.customer = new Customer();
+    }
+
+    saveClientAndContinue() {
+        this.wizard.next();
+        this.saveCustomer();
+    }
+
+    continueWithoutClient() {
+        this.order.customer.anonymous = true;
+        this.wizard.next();
+    }
+
+    backToClientEdit() {
+        this.order.customer.anonymous = false;
+        this.wizard.previous();
+    }
+
+    saveAndPrintOrder() {
         this.notificationService.showBusy('order.status.savingAndPrinting');
         this.remote.saveOrder(this.order, (state: MessageType) => {
             this.notificationService.hideBusy();
@@ -74,41 +81,4 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
             this.notificationService.notify(new DxNotification(message, state));
         });
     };
-
-    getCustomers() {
-        this.remote.getCustomers(this.order.customer).subscribe((customerResponse: Customer[]) => {
-            this.customers = customerResponse;
-            this.reRenderClientList();
-        });
-    };
-
-    changeCustomerType(value: CustomerType) {
-        this.order.customer.type = value;
-        this.getCustomers();
-    }
-
-    changePhone(value: string) {
-        this.order.customer.phoneFormatted = value;
-        this.getCustomers();
-    }
-
-    changeName(value: string) {
-        this.order.customer.name = value;
-        this.getCustomers();
-    }
-
-    selectCustomer(customer: Customer) {
-        this.order.customer = Customer.fromObject(customer);
-    }
-
-    clearCustomerId() {
-        this.order.customer.id = null;
-    }
-
-    reRenderClientList(): void {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-            this.dtTrigger.next();
-        });
-    }
 }
