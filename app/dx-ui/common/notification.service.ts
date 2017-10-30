@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {DxNotification} from "../dx-ui.model";
+import {DxNotification, MessageType} from "../dx-ui.model";
 
 @Injectable()
 export class NotificationService {
@@ -27,5 +27,13 @@ export class NotificationService {
                 this.notificationList.splice(index, 1);
             }
         };
+    }
+
+    error(message: string) {
+        this.notify(new DxNotification(message, MessageType.Fail));
+    }
+
+    success(message: string) {
+        this.notify(new DxNotification(message, MessageType.Success));
     }
 }

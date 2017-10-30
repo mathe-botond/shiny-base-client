@@ -14,13 +14,13 @@ export class ProductService {
         private settings: SettingsService) {
     };
 
-    getProducts = (query: string) : Observable<any[]> => {
-        return this.http.get(this.api.getProductSearchEndpoint(query)).map((response : any) => {
+    getProducts(query: string) : Observable<any[]> {
+        return this.http.get(this.api.getProductSearch(query)).map((response : any) => {
             let result : any[] = response.params;
             result.forEach((product : Product) => {
                 product.formatted = product.description + ' - ' + product.price + ' ' + this.settings.currency;
             });
             return result;
         });
-    };
+    }
 }

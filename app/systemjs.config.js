@@ -28,16 +28,21 @@
             'electron': '@node/electron',
             'jquery': 'npm:jquery/dist/jquery.js',
             'bootstrap': 'npm:bootstrap/dist/js/bootstrap.min.js',
-            'datatables.net': 'npm:datatables.net/js/jquery.dataTables.js',
-            'angular-datatables': 'npm:angular-datatables/bundles/angular-datatables.umd.js',
+            '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+            'popper': 'npm:popper.js/dist/umd/popper.js',
             'angular2-wizard': 'npm:angular2-wizard/dist/index.js',
+            'moment': 'npm:moment/moment.js',
+            'fullcalendar': 'npm:fullcalendar/dist/fullcalendar.js',
+            'ap-angular2-fullcalendar': 'npm:ap-angular2-fullcalendar',
 
             'rxjs': 'npm:rxjs',
             'tslib': 'npm:tslib/tslib.js',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
             'zone': 'npm:zone.js/dist/zone.js',
             // other libraries
-            'dx-ui': 'gen/dx-ui'
+            'dx-ui': 'gen/dx-ui',
+            'ag-grid-angular': 'npm:ag-grid-angular',
+            'ag-grid': 'npm:ag-grid',
         },
         meta: {
             'npm:jquery/dist/jquery.js': {
@@ -46,13 +51,12 @@
             'npm:core-js/client/shim.min.js': {
                 format: 'global'
             },
-            'npm:datatables.net/js/jquery.dataTables.js': {
-                format: 'global',
-                deps: [ 'npm:jquery/dist/jquery.js', 'npm:core-js/client/shim.min.js' ]
+            'popper': {
+                format: 'global'
             },
             'npm:bootstrap/dist/js/bootstrap.min.js': {
                 format: 'global',
-                deps: [ 'npm:jquery/dist/jquery.js' ]
+                deps: [ 'npm:jquery/dist/jquery.js', 'popper' ]
             },
             'npm:zone.js/dist/zone.js': {
                 format: 'global',
@@ -83,6 +87,16 @@
             },
             'node_modules/angular2-wizard/dist/src/': {
                 defaultExtension: 'js'
+            },
+            'ag-grid': {
+                main: 'main.js'
+            },
+            'ag-grid-angular': {
+                main: 'main.js'
+            },
+            'ap-angular2-fullcalendar': {
+                main: 'index.js',
+                defaultExtension: 'js'
             }
         },
 
@@ -93,13 +107,11 @@
     Promise.all([
         System.import('jquery'),
         System.import('shim'),
+        System.import('popper'),
         System.import('bootstrap'),
-        System.import('datatables.net'),
         System.import('zone')
 
     ]).then(function() {
         System.import('gen/main/main').catch(function(err){ console.error(err); });
     });
 })(this);
-
-

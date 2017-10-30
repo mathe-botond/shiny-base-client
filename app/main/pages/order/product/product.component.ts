@@ -23,4 +23,8 @@ export class ProductComponent {
         this.order.price = product.price;
         this.order.details = product.description;
     };
+
+    getProducts = (query: string): any => {
+        return this.service.getProducts(query);
+    }
 }

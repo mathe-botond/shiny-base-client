@@ -1,50 +1,43 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {Customer, CustomerType} from "../../../app.model";
-import {DataTableDirective} from "angular-datatables";
-import {Subject} from "rxjs/Subject";
-import {CustomerService} from "./customer.service";
+import {CustomerService} from "../../../common/service/customer.service";
 import {MaskService} from "../../../common/mask.service";
+import {GridOptions} from "ag-grid";
+import {GridUtil} from "../../../common/service/grid.util";
 
 @Component({
     selector: 'app-customer',
-    templateUrl: 'customer.component.html',
-    providers: [CustomerService]
+    templateUrl: 'customer.component.html'
 })
-export class CustomerComponent implements OnInit, AfterViewInit {
+export class CustomerComponent {
     @Input() customer: Customer;
 
-    @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-
-    customerListOptions: DataTables.Settings = {};
-
     customerTypes = CustomerType;
+    customerColumns: any[] = [
+        {headerNameKey: 'customer.id', field: 'id'},
+        {headerNameKey: 'customer.type.name', translate: 'customer.type.', field: 'type'},
+        {headerNameKey: 'customer.name', field: 'name'},
+        {headerNameKey: 'customer.telephone', field: 'phoneFormatted'}
+    ];
+
+    customerListOptions: GridOptions;
 
     customers: Customer[] = [];
-    dtTrigger: Subject<any> = new Subject();
 
     constructor(private remote: CustomerService,
+                public grids: GridUtil,
                 public mask: MaskService) {
+
         this.customer = new Customer();
         this.getCustomers();
-    }
-
-    ngOnInit(): void {
-        this.customerListOptions = {
-            lengthChange: false,
-            searching: false
-        };
-    }
-
-    ngAfterViewInit(): void {
-        this.dtTrigger.next();
+        this.customerListOptions = grids.getDefaults(this.customerColumns);
     }
 
     getCustomers() {
         this.remote.getCustomers(this.customer).subscribe((customerResponse: Customer[]) => {
             this.customers = customerResponse;
-            this.reRenderClientList();
         });
-    };
+    }
 
     changeCustomerType(value: CustomerType) {
         this.customer.type = value;
@@ -67,12 +60,5 @@ export class CustomerComponent implements OnInit, AfterViewInit {
 
     clearCustomerId() {
         this.customer.id = null;
-    }
-
-    reRenderClientList(): void {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-            this.dtTrigger.next();
-        });
     }
 }

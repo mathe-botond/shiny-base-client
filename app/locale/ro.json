@@ -2,13 +2,22 @@
     "common": {
         "pleaseSelect": "<Alegeți>",
         "save": "Salvare",
-        "currency": ""
+        "currency": "Monedă"
     },
     "menu": {
         "dashboard": "Dashboard",
         "newOrder": "Introducere",
         "settings": "Setări",
         "logout": "Deconectare"
+    },
+    "dashboard": {
+        "list": {
+            "title": "Lista ordini"
+        },
+        "calendar": {
+            "title": "Planificare",
+            "saveFailed": "Nu sa reusit salvarea modificarii evenimentului din calendar"
+        }
     },
     "customer": {
         "id": "ID. client",
@@ -28,7 +37,8 @@
             "saveClientOnly": "Salvare numai date client",
             "continueWithoutClientData": "Continuare fără date client",
             "saveAndContinue": "Salvare și continuare"
-        }
+        },
+        "saved": "Datele clientului au fost salvate"
     },
     "order": {
         "title": "Date ordine",

@@ -21,7 +21,11 @@ if (isDev) {
 
 function createWindow () {
     // Create the browser window.
-    win = new BrowserWindow({show: false});
+    win = new BrowserWindow({
+        show: false,
+        icon: path.join(__dirname, 'resources/icon.png')
+    });
+
     printerWin = new BrowserWindow({show: false, useContentSize: true});
 
     win.maximize();

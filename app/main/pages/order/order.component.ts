@@ -1,25 +1,28 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Customer, Order} from "../../app.model";
 import {SettingsService} from "../settings/settings.service";
-import {OrderRemoteService} from "./order.service";
+import {OrderService} from "../../common/service/order.service";
 import {NotificationService} from "../../../dx-ui/common/notification.service";
 import {DxNotification, MessageType} from "../../../dx-ui/dx-ui.model";
 import {NavigationService} from "../../ui/nav/navigation.service";
 import {PrintService} from "../../common/service/print.service";
 import {WizardComponent} from "angular2-wizard";
+import {CustomerComponent} from "./customer/customer.component";
+import {CustomerService} from "../../common/service/customer.service";
 
 @Component({
-    templateUrl: './order.component.html',
-    providers: [OrderRemoteService]
+    templateUrl: './order.component.html'
 })
 export class OrderPageComponent implements AfterViewInit {
     order: Order;
 
     @ViewChild('wizard') wizard: WizardComponent;
+    @ViewChild('customers') customers: CustomerComponent;
 
     constructor(
             public settings: SettingsService,
-            private remote: OrderRemoteService,
+            private orderService: OrderService,
+            private customerService: CustomerService,
             private notificationService: NotificationService,
             private navigation: NavigationService,
             private printer: PrintService) {
@@ -41,9 +44,10 @@ export class OrderPageComponent implements AfterViewInit {
     }
 
     private saveCustomer() {
-        this.remote.saveCustomer(this.order.customer, (message: MessageType) => {
+        this.customerService.saveCustomer(this.order.customer, (message: MessageType) => {
             const textMessage = (message == MessageType.Success) ? 'customer.saved' : 'customer.saveFailed';
             this.notificationService.notify(new DxNotification(textMessage, message));
+            this.customers.getCustomers();
         });
     }
 
@@ -69,7 +73,7 @@ export class OrderPageComponent implements AfterViewInit {
 
     saveAndPrintOrder() {
         this.notificationService.showBusy('order.status.savingAndPrinting');
-        this.remote.saveOrder(this.order, (state: MessageType) => {
+        this.orderService.saveOrder(this.order, (state: MessageType) => {
             this.notificationService.hideBusy();
             let message : string = (state == MessageType.Success) ?
                 'order.notifications.success' : 'order.notifications.fail';

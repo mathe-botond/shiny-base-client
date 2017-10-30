@@ -48,7 +48,8 @@
     <label class="control-label col-sm-3" for="client-name" translate>customer.name</label>
     <div class="input-group col-sm-4 col-xs-12">
         <input type="text"
-               [(ngModel)]="customer.name"
+               [ngModel]="customer.name"
+               (ngModelChange)="changeName($event)"
                name="customer.name"
                id="client-name"
                class="form-control"
@@ -56,27 +57,8 @@
     </div>
 </div>
 
-<table datatable="ng" [dtOptions]="customerListOptions" [dtTrigger]="dtTrigger" class="table">
-    <thead>
-    <tr>
-        <th colspan="3"><span translate>customer.existing</span>:</th>
-    </tr>
-    <tr>
-        <th translate>customer.id</th>
-        <th translate>customer.type.name</th>
-        <th translate>customer.name</th>
-        <th translate>customer.telephone</th>
-    </tr>
-    </thead>
-    <tbody *ngIf="customers.length > 0">
-    <tr *ngFor="let customer of customers; let i = index"
-        (click)="selectCustomer(customers[i])"
-        [ngClass]="{active: customer.id == customer.id}">
-        <td>{{customer.id}}</td>
-        <td translate>customer.type.{{customer.type}}</td>
-        <td>{{customer.name}}</td>
-        <td>{{customer.phoneFormatted}}</td>
-    </tr>
-    </tbody>
-</table>
-
+<ag-grid-angular #agGrid class="ag-theme-material small-table"
+         [gridOptions]="customerListOptions"
+         [columnDefs]="customerColumns"
+         [rowData]="customers">
+</ag-grid-angular>

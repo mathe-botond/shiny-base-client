@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="node_modules/bootswatch/spacelab/bootstrap.css" />
-    <link rel="stylesheet" href="node_modules/datatables.net-dt/css/jquery.dataTables.css" />
+    <link href="node_modules/ag-grid/dist/styles/ag-grid.css" rel="stylesheet"/>
+    <link href="node_modules/ag-grid/dist/styles/theme-material.css" rel="stylesheet"/>
+    <link href="node_modules/fullcalendar/dist/fullcalendar.css" rel="stylesheet"/>
 
     <!-- Polyfill(s) for older browsers -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -19,7 +21,9 @@
 </head>
 
 <body>
-<my-app>Loading AppComponent content here ...</my-app>
+<my-app>
+    <div class="splash"></div>
+</my-app>
 </body>
 </html>
 

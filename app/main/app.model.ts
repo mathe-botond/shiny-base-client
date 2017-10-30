@@ -85,6 +85,17 @@ export class Order {
         this.type = OrderType.Patch;
         this.customer = customer;
     }
+
+    static fromObject(raw: any) {
+        let order = new Order();
+        order.customer = raw.customer ? Customer.fromObject(raw.customer) : null;
+        order.id = raw.id;
+        order.type = raw.type;
+        order.price = raw.price;
+        order.details = raw.details;
+        order.isEmergency = raw.isEmergency;
+        return order;
+    }
 }
 
 export class Product {

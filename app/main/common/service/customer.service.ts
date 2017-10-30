@@ -1,15 +1,18 @@
 import {Injectable} from "@angular/core";
-import {Customer} from "../../../app.model";
+import {Customer} from "../../app.model";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
-import {ApiService} from "../../../common/api.service";
-import {Response} from "../../../common/common.model";
+import {ApiService} from "../api.service";
+import {Response} from "../common.model";
+import {MessageType} from "../../../dx-ui/dx-ui.model";
+import {ResponseHandler} from "../response-handler.service";
 
 @Injectable()
 export class CustomerService {
     constructor(
         private api: ApiService,
-        private http: HttpClient) {
+        private http: HttpClient,
+        private responseHandler: ResponseHandler) {
     };
 
     getCustomers = (query: Customer) : Observable<any[]> => {
@@ -23,4 +26,8 @@ export class CustomerService {
                 return result;
             });
     };
+
+    saveCustomer(customer: Customer, callback: (state: MessageType) => any) {
+        this.responseHandler.handle(this.http.post(this.api.saveCustomer, customer.toObject()), callback);
+    }
 }
