@@ -1,6 +1,6 @@
 {
-  "name": "style-base",
-  "version": "0.0.1",
+  "name": "ShinyBase",
+  "version": "1.0.0-Beta",
   "description": "Embedded system",
   "main": "main.js",
   "dependencies": {

@@ -31,6 +31,7 @@ export class CustomerComponent {
         this.customer = new Customer();
         this.getCustomers();
         this.customerListOptions = grids.getDefaults(this.customerColumns);
+        this.customerListOptions.onSelectionChanged = () => { this.selectCustomer(); };
     }
 
     getCustomers() {
@@ -54,8 +55,11 @@ export class CustomerComponent {
         this.getCustomers();
     }
 
-    selectCustomer(customer: Customer) {
-        this.customer = Customer.fromObject(customer);
+    selectCustomer() {
+        const selectedCustomers = this.customerListOptions.api.getSelectedRows();
+        if (selectedCustomers && selectedCustomers.length > 0) {
+            this.customer = Customer.fromObject(selectedCustomers[0]);
+        }
     }
 
     clearCustomerId() {

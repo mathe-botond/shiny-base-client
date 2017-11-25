@@ -10,5 +10,6 @@ export const Defaults: Settings = {
         marginTop: 10,
         footer: ''
     },
-    endpoint: 'http://localhost/shiny-base-backend/'
+    //endpoint: 'http://localhost/shiny-base-backend/'
+    endpoint: 'http://stylemile.ro/sm-base/'
 };

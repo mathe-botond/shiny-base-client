@@ -21,8 +21,8 @@ export class CalendarPlannerComponent {
             right: 'month,agendaWeek,agendaDay'
         },
         events: [],
-        eventDrop: (event) => { this.save(event) },
-        eventResize: (event) => { this.save(event) }
+        eventDrop: (event: any) => { this.save(event) },
+        eventResize: (event: any) => { this.save(event) }
     };
 
     constructor(private api: ApiService,
