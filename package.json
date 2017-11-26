@@ -1,31 +1,41 @@
 {
-  "name": "shiny-base-client",
-  "version": "0.0.1",
+  "name": "ShinyBase",
+  "version": "1.0.0-Beta",
   "description": "Frontend for stylemile mainframe",
   "main": "main.js",
-  "scripts": {
-    "build": {
-      "appId": "ro.shinybuttons.shiny-base-client"
-    },
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "start": "electron app",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Mathe E. Botond",
   "license": "ISC",
+  "scripts": {
+    "watch": "webpack --config webpack.renderer.js --progress --profile --colors --watch",
+    "start": "electron app"
+  },
   "devDependencies": {
-    "asar": "^0.13.0",
-    "electron": "^1.7.8",
-    "electron-reload": "^1.2.1",
-    "electron-builder": "^19.27.7",
-    "fs-jetpack": "^1.2.0",
-    "gulp": "^3.9.1",
-    "gulp-cached": "^1.1.1",
-    "merge2": "^1.2.0"
+    "@types/core-js": "^0.9.43",
+    "@types/node": "^8.0.53",
+    "copy-webpack-plugin": "^1.1.1",
+    "css-loader": "^0.23.1",
+    "electron": "^1.7.9",
+    "electron-builder": "^5.2.0",
+    "electron-prebuilt": "1.1.3",
+    "electron-reload": "^1.2.2",
+    "expose-loader": "^0.7.1",
+    "file-loader": "^0.8.5",
+    "imports-loader": "^0.6.5",
+    "json-loader": "^0.5.7",
+    "node-sass": "^3.4.2",
+    "raw-loader": "^0.5.1",
+    "resolve-url-loader": "^1.4.3",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^3.1.1",
+    "typescript": "~2.3.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-node-externals": "^1.2.0",
+    "write-file-webpack-plugin": "^4.2.0"
   },
   "dependencies": {
-    "gulp-typescript": "^3.2.2",
-    "typescript": "^2.5.2"
+    "hammerjs": "^2.0.8"
   }
 }

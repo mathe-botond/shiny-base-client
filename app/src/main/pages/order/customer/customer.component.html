@@ -1,0 +1,64 @@
+
+<div class="form-group">
+    <label class="control-label col-sm-3" for="client-id" translate>customer.id</label>
+    <div class="input-group col-sm-4 col-xs-12">
+        <input type="text" [ngModel]="customer.id || ('customer.new' | translate)"
+               name="customer.id"
+               id="client-id"
+               class="form-control"
+               [readonly]="true" />
+
+        <div class="input-group-btn">
+            <button class="btn btn-default"
+                    (click)="clearCustomerId()"
+                    translate>customer.clearId</button>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-3" for="client-type" translate>customer.type.name</label>
+    <div class="input-group col-sm-4 col-xs-12">
+        <select id="client-type" class="form-control" [ngModel]="customer.type"
+                (ngModelChange)="changeCustomerType($event)" name="type">
+            <option *ngFor="let customerType of customerTypes | keys" [value]="customerType.value" translate>customer.type.{{customerType.value}}</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-3" for="client-telephone" translate>customer.telephone</label>
+    <div class="col-sm-4 col-xs-12">
+        <div class="row">
+            <div class="input-group col-xs-12">
+                <input type="tel"
+                       [ngModel]="customer.phoneFormatted"
+                       (ngModelChange)="changePhone($event)"
+                       [disabled]="customer.anonymous"
+                       [textMask]="mask.phone"
+                       id="client-telephone"
+                       name="phone"
+                       class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-3" for="client-name" translate>customer.name</label>
+    <div class="input-group col-sm-4 col-xs-12">
+        <input type="text"
+               [ngModel]="customer.name"
+               (ngModelChange)="changeName($event)"
+               name="customer.name"
+               id="client-name"
+               class="form-control"
+               [disabled]="customer.anonymous" />
+    </div>
+</div>
+
+<ag-grid-angular #agGrid class="ag-theme-material small-table"
+         [gridOptions]="customerListOptions"
+         [columnDefs]="customerColumns"
+         [rowData]="customers">
+</ag-grid-angular>

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-inverse navbar-fixed-side stylish-bg" role="navigation">
+    <div class="container">
+        <div class="navbar-collapse">
+            <div class="logo"></div>
+            <ul class="nav navbar-nav nav-gradient">
+                <li *ngFor="let menuItem of navigation.menu">
+                    <a class="nav-item" routerLink="{{menuItem.target}}" routerLinkActive="active">
+                        <span class="menu-item-icon glyphicon glyphicon-{{menuItem.icon}}"></span>
+                        <span translate class="menu-item-label">{{menuItem.label}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

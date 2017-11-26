@@ -1,0 +1,83 @@
+<div class="panel panel-default">
+    <div class="panel-heading" translate>menu.settings</div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend translate>settings.general</legend>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="currency" translate>common.currency</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <select id="currency" class="form-control" name="currency" [(ngModel)]="settings.currency">
+                            <option value="" translate>common.pleaseSelect</option>
+                            <option *ngFor="let currency of currencies" [value]="currency.symbol">
+                                {{currency.type}} ({{currency.symbol}})
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend translate>print.title</legend>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" translate>print.state.title</label>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="useMode"
+                                       [(ngModel)]="settings.print.mode" [value]="useMode.Silent">
+                                <span translate>print.state.silent</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="useMode"
+                                       [(ngModel)]="settings.print.mode" [value]="useMode.WithSettings">
+                                <span translate>print.state.withSettings</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="useMode"
+                                    [(ngModel)]="settings.print.mode" [value]="useMode.NoPrinting">
+                                <span translate>print.state.disabled</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="printer" translate>print.printer</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <select id="printer" class="form-control" name="printer" [(ngModel)]="settings.print.printer">
+                            <option value="" translate>common.pleaseSelect</option>
+                            <option *ngFor="let printer of printers" [value]="printer.name">
+                                {{printer.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="paper-width" translate>print.paperWidth</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <input type="number" id="paper-width" class="form-control" name="paperWidth"
+                               [(ngModel)]="settings.print.width" />
+                        <span class="input-group-addon">px</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="order-details" translate>print.footer</label>
+                    <div class="input-group col-sm-4 col-xs-12">
+                        <textarea id="order-details" class="form-control" name="footer"
+                            [(ngModel)]="settings.print.footer"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="panel-footer text-center">
+        <button class="btn btn-primary" translate (click)="saveSettings()">common.save</button>
+    </div>
+</div>

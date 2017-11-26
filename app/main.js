@@ -1,8 +1,8 @@
 const {app, BrowserWindow, Menu} = require('electron');
 const isDev = require('electron-is-dev');
 
-var printer = require('./engine/printer.js');
-var mySettings = require('./engine/settings');
+var printer = require('./src/engine/printer');
+var mySettings = require('./src/engine/settings');
 
 const path = require('path');
 const url = require('url');
@@ -12,11 +12,7 @@ const url = require('url');
 let win, printerWin;
 
 if (isDev) {
-    require('electron-reload')(__dirname, {
-        ignored: [
-            /node_modules|[/\\]\.|.*\.ts/
-        ]
-    });
+    require('electron-reload')(path.resolve(__dirname, '..', 'build/'));
 }
 
 function createWindow () {
@@ -34,7 +30,7 @@ function createWindow () {
 
     // and load the index.html of the app.
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, '../app/index.html'),
         protocol: 'file:',
         hash: "",
         slashes: true
@@ -42,7 +38,7 @@ function createWindow () {
 
     printerWin.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'index.html'),
+            pathname: path.join(__dirname, '../app/index.html'),
             protocol: 'file:',
             hash: "print",
             slashes: true
