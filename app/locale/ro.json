@@ -2,7 +2,8 @@
     "common": {
         "pleaseSelect": "<Alegeți>",
         "save": "Salvare",
-        "currency": "Monedă"
+        "currency": "Monedă",
+        "actions": "Operatiuni"
     },
     "menu": {
         "dashboard": "Dashboard",
@@ -64,7 +65,9 @@
         "notifications": {
             "success": "Ordinea a fost salvată cu succes",
             "fail": "S-a íntâmplat un eror în timpul salvării"
-        }
+        },
+        "taskStart": "Planificat la",
+        "importantText": "COMANDA URGENTA"
     },
     "print": {
         "title": "Printare",

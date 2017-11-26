@@ -27,7 +27,10 @@ export class CustomerService {
             });
     };
 
-    saveCustomer(customer: Customer, callback: (state: MessageType) => any) {
-        this.responseHandler.handle(this.http.post(this.api.saveCustomer, customer.toObject()), callback);
+    saveCustomer(customer: Customer, callback: (state: MessageType, id: number) => any) {
+        this.responseHandler.handle(
+            this.http.post(
+                this.api.saveCustomer,
+                customer.toObject()), callback);
     }
 }

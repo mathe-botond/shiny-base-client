@@ -33,7 +33,6 @@ export class OrderPageComponent implements AfterViewInit {
     private init() {
         this.order = new Order();
         this.order.customer = new Customer();
-        this.order.customer.phone = '40';
     }
 
     ngAfterViewInit(): void {
@@ -44,9 +43,12 @@ export class OrderPageComponent implements AfterViewInit {
     }
 
     private saveCustomer() {
-        this.customerService.saveCustomer(this.order.customer, (message: MessageType) => {
+        this.customerService.saveCustomer(this.order.customer, (message: MessageType, id: number) => {
             const textMessage = (message == MessageType.Success) ? 'customer.saved' : 'customer.saveFailed';
             this.notificationService.notify(new DxNotification(textMessage, message));
+            if (id) {
+                this.order.customer.id = id;
+            }
             this.customers.getCustomers();
         });
     }

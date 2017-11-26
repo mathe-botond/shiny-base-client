@@ -9,7 +9,7 @@ function recursivePrint(printerWin, arg, count) {
     if (count > 1) {
         setTimeout(function() {
             recursivePrint(printerWin, arg, count-1);
-        }, 4000);
+        }, 5000);
     }
 }
 

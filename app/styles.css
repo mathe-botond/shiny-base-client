@@ -177,3 +177,11 @@ ngui-auto-complete {
     height: 90vh;
     margin-top: 5px;
 }
+
+.full-height {
+    height: 85vh;
+}
+
+.scroll {
+    overflow: auto;
+}

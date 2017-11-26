@@ -9,7 +9,8 @@ export const Defaults: Settings = {
         marginLeft: 10,
         marginTop: 10,
         footer: ''
-    },
-    //endpoint: 'http://localhost/shiny-base-backend/'
-    endpoint: 'http://stylemile.ro/sm-base/'
+    }
 };
+
+export const endpoint: string = 'http://localhost/shiny-base-backend/';
+// export const endpoint: string = 'http://stylemile.ro/sm-base/';

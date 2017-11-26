@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Customer, CustomerType} from "../../../app.model";
 import {CustomerService} from "../../../common/service/customer.service";
 import {MaskService} from "../../../common/mask.service";
@@ -11,6 +11,7 @@ import {GridUtil} from "../../../common/service/grid.util";
 })
 export class CustomerComponent {
     @Input() customer: Customer;
+    @Output() customerChange: EventEmitter<Customer> = new EventEmitter();
 
     customerTypes = CustomerType;
     customerColumns: any[] = [
@@ -42,17 +43,22 @@ export class CustomerComponent {
 
     changeCustomerType(value: CustomerType) {
         this.customer.type = value;
-        this.getCustomers();
+        this.updateCustomer();
     }
 
     changePhone(value: string) {
         this.customer.phoneFormatted = value;
-        this.getCustomers();
+        this.updateCustomer();
     }
 
     changeName(value: string) {
         this.customer.name = value;
+        this.updateCustomer();
+    }
+
+    updateCustomer() {
         this.getCustomers();
+        this.customerChange.emit(this.customer);
     }
 
     selectCustomer() {
@@ -60,6 +66,7 @@ export class CustomerComponent {
         if (selectedCustomers && selectedCustomers.length > 0) {
             this.customer = Customer.fromObject(selectedCustomers[0]);
         }
+        this.customerChange.emit(this.customer);
     }
 
     clearCustomerId() {

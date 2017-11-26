@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading" translate>customer.title</div>
                 <div class="panel-body">
-                    <app-customer #customers [customer]="order.customer"></app-customer>
+                    <app-customer #customers [(customer)]="order.customer"></app-customer>
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-default" tabindex="-1" (click)="saveAndClearCustomer()" translate>customer.action.saveClientOnly</button>
@@ -19,7 +19,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading" translate>order.title</div>
                 <div class="panel-body">
-                    <app-product [order]="order"></app-product>
+                    <app-product [(order)]="order"></app-product>
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-default" tabindex="-1" translate (click)="backToClientEdit()">order.actions.back</button>

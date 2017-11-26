@@ -41,7 +41,7 @@ export class Customer {
     }
 
     private format(phone: string) {
-        return phone.replace(/(\d{2})(\d{3})(\d{2})(\d{2})(\d{2})/, "+$1-$2-$3-$4-$5");
+        return phone.replace(/(\d{4})(\d{2})(\d{2})(\d{2})/, "$1-$2-$3-$4");
     }
 
     get phone(): string {
@@ -80,6 +80,8 @@ export class Order {
     price: number;
     details: string;
     isEmergency: boolean;
+    taskStart: string;
+    taskEnd: string;
 
     constructor(customer: Customer = null) {
         this.type = OrderType.Patch;
@@ -94,6 +96,7 @@ export class Order {
         order.price = raw.price;
         order.details = raw.details;
         order.isEmergency = raw.isEmergency;
+        order.taskStart = raw.taskStart;
         return order;
     }
 }
@@ -113,7 +116,6 @@ export class PrintData {
 export class Settings {
     print: PrintSettings;
     currency: string;
-    endpoint: string;
 
     constructor() {
         this.print = new PrintSettings();

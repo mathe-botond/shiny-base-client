@@ -1,5 +1,28 @@
-<ag-grid-angular #agGrid class="ag-theme-material full-page-table"
-                 [gridOptions]="listOptions"
-                 [columnDefs]="columns"
-                 [rowData]="orders">
-</ag-grid-angular>
+<div class="scroll full-height">
+    <table class="table">
+        <thead>
+            <tr>
+                <th translate>customer.name</th>
+                <th translate>customer.telephone</th>
+                <th translate>order.type.name</th>
+                <th translate>order.taskStart</th>
+                <th translate>order.price</th>
+                <th translate>common.actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.customer?.name}}</td>
+                <td>{{order.customer?.phoneFormatted}}</td>
+                <td translate>order.type.{{order.type}}</td>
+                <td>{{order.taskStart}}</td>
+                <td>{{order.price}} {{settings?.currency}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="reprint(order)">
+                        <span class="glyphicon glyphicon-print"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

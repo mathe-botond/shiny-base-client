@@ -26,6 +26,11 @@ h4 {
     font-size: 0.8em;
 }
 
+.print-value {
+    font-size: 1em;
+    font-weight: bold;
+}
+
 .price {
     font-size: 1em;
     font-weight: bold;
@@ -38,4 +43,8 @@ label {
 hr {
     margin-bottom: 0;
     border-top: 1px solid black;
+}
+
+.important {
+    text-decoration: underline !important;
 }

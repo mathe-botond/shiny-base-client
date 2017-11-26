@@ -22,6 +22,9 @@ module.exports = {
         extensions: ['','.ts','.js','.css','.scss']
     },
 
+    cache: true,
+    devtool: 'source-map',
+
     module: {
         noParse: /node_modules\/json-schema\/lib\/validate\.js/,
         loaders: [
@@ -49,7 +52,15 @@ module.exports = {
     },
 
     plugins: [
-        new CommonsChunkPlugin({ name: ['vendor', 'polyfills']}),
+        /* new CommonsChunkPlugin({ name: ['vendor', 'polyfills']}),
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true, 
+            cache: true, 
+            warningsFilter: (source) => {
+                console.log(source);
+                return false;
+            }
+        }), */
         new webpack.DefinePlugin({
             $dirname: '__dirname',
         })

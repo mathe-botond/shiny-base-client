@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Settings} from "../../app.model";
-import {Defaults} from "../../../config";
+import {Defaults, endpoint} from "../../../config";
+// noinspection TypeScriptCheckImport
 import {ipcRenderer} from 'electron';
 
 @Injectable()
@@ -8,7 +9,7 @@ export class SettingsService {
     data: Settings = Defaults;
 
     get endpoint(): string {
-        return this.data.endpoint;
+        return endpoint;
     }
 
     get currency(): string {
